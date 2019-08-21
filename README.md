@@ -11,7 +11,7 @@ Boot Sector version of the 15 number slider puzzle
 Get the numbers in order by using the arrow keys to move the 'tiles' around. Assemble the 'evil' version for an impossible challange
 
 # Assemble and Play
-* nasm bootslide_evil.asm -f bin -o bootslide
+* nasm bootslide.asm -f bin -o bootslide
 * qemu-system-i386 -hda bootslide
 
 # Issues
