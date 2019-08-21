@@ -12,7 +12,7 @@ Get the numbers in order by using the arrow keys to move the 'tiles' around. Ass
 
 # Assemble and Play
 * nasm bootslide_evil.asm -f bin -o bootslide
-* qemu-system-i386 -hda bootslide_evil
+* qemu-system-i386 -hda bootslide
 
 # Issues
 * Scrambling doesn't work well on QEMU on macos (rdtsc works differently)
