@@ -100,7 +100,7 @@ gameloop:
   je left
   cmp ah, RIGHT
   je right
-  cmp al, 'x'
+  cmp ah, 0x01
   je exit
   int 0x19                ; A non-directional key was pressed (reboot/rescramble)
   exit:
