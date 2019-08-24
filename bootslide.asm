@@ -44,10 +44,9 @@ rdtsc                     ; Get random
 cmp al, 0x10              ; 1 in 16 chance it will be evil
 ja draw_border            ; If above, then not evil
 ; Evil (Descending solvability)
-mov al, [boarddata]       ; Get first board number
-mov bl, [boarddata + 1]   ; And secodn board number
-mov [boarddata], bl       ; and then swap them
-mov [boarddata + 1], al   ; (now evil, can't solve in ascending order)
+mov ax, [boarddata]       ; Get first and second board number
+xchg ah,al                ; And then swap them
+mov [boarddata], ax       ; (now evil, can't solve in ascending order)
 mov byte [border + 1], 0xcc       ; Change border color to light red
 mov byte [tile1 + 2], 0x48        ; Change tile border to shaded red
 mov byte [tile2 + 1], 0x44        ; Change tile to red
@@ -71,7 +70,7 @@ scramble:
   and al, 3                 ; Only preserve last 2 bits (for 4 possible up/down/left/right moves)
   push word scramble        ; point of return instead of using call for the below jumps
   ; Do a random tile move based on random results
-  cmp al, 0
+; cmp al, 0              ; and al,3 already did this comparison
   je up
   cmp al, 1
   je down
@@ -104,7 +103,9 @@ gameloop:
   je exit
   int 0x19                ; A non-directional key was pressed (reboot/rescramble)
   exit:
-    int 0x20
+    mov ax,0x0002         ; Clear screen
+    int 0x10
+    int 0x20              ; Return to bootOS
   up:
     mov bx, bp                   ; get blank tile location
     cmp bx, 0xb                  ; Out of bounds?
