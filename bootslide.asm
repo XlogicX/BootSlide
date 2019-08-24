@@ -40,7 +40,7 @@ rep stosw                 ; push it to video memory
 mov bp, 0x9               ; blanklocation
 
 ; Evil?
-rdtsc                     ; Get random
+in al,(0x40)              ; Get random
 cmp al, 0x10              ; 1 in 16 chance it will be evil
 ja draw_border            ; If above, then not evil
 ; Evil (Descending solvability)
@@ -66,7 +66,7 @@ mov cl, 0xff              ; Init to 255 rounds of movement
 scramble:
   dec cx
   je gameloop               ; Once done, go to main game loop
-  rdtsc                     ; Get 'random' value
+  in al,(0x40)              ; Get 'random' value
   and al, 3                 ; Only preserve last 2 bits (for 4 possible up/down/left/right moves)
   push word scramble        ; point of return instead of using call for the below jumps
   ; Do a random tile move based on random results
