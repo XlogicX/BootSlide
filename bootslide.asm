@@ -26,8 +26,6 @@ mov ss, ax                ; stack starts at 0
 mov sp, 0x9c00            ; 200h past code start
 mov ah, 0xb8              ; text video memory
 mov es, ax                ; ES=0xB800
-mov al, 0x03
-int 0x10
 mov ah, 1
 mov ch, 0x26  
 int 0x10
